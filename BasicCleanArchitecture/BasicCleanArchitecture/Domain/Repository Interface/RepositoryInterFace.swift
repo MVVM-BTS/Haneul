@@ -8,4 +8,6 @@
 import Foundation
 
 // TODO: 네트워크 요청 Interface 작성
-
+protocol MovieRepository {
+    func fetchMovieList()
+}

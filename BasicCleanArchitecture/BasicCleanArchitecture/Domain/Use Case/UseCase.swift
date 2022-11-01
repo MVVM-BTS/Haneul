@@ -7,5 +7,16 @@
 
 import Foundation
 
-// TODO: CRUD 요청하는 Use case 작성
-
+// TODO: Repository Interface를 통해 영화리스트 raw data fetch - 의존성 역전
+class GetMovieListUseCase {
+    
+    private var repository: MovieRepository
+    
+    func fetchMovieList() ->  {
+        repository.fetchMovieList()
+    }
+    
+    init(repository: MovieRepository) {
+        self.repository = repository
+    }
+}

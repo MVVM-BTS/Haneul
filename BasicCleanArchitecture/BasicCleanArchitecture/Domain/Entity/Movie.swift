@@ -9,7 +9,6 @@ import Foundation
 
 // TODO: 영화 객체
 struct Movie {
-    
     var Title: String
     var score: Double
 }
