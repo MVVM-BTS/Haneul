@@ -8,15 +8,15 @@
 import Foundation
 
 struct MovieRequest: Codable {
-    var title: String
-    var link: String
-    var image: String
-    var pubDate: String
-    var director: String
-    var actor: String
-    var userRating: String
+    var query: String
+    var display: Int?
+    var start: Int?
+    var genre: String?
+    var country: String?
+    var yearfrom: Int?
+    var yearto: Int?
     
     enum CodingKeys: String, CodingKey {
-        case title, link, image, pubDate, director, actor, userRating
+        case query, display, start, genre, country, yearfrom, yearto
     }
 }

@@ -11,12 +11,22 @@ import Foundation
 class GetMovieListUseCase {
     
     private var repository: MovieRepository
+    private var movieRequest: MovieRequest
+    public var movieList: [Movie] = []
     
-    func fetchMovieList() ->  {
-        repository.fetchMovieList()
+    func fetchMovieList() -> [Movie] {
+        // TODO: 요청 쿼리 작성
+        
+        // TODO: 요청
+        repository.fetchMovieList(request: movieRequest) { [weak self]
+            result in
+            self?.movieList = result
+        }
+        return movieList
     }
     
-    init(repository: MovieRepository) {
+    init(repository: MovieRepository, movieRequest: MovieRequest) {
         self.repository = repository
+        self.movieRequest = movieRequest
     }
 }
