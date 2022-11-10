@@ -11,6 +11,7 @@ class MovieListRepository: MovieRepository {
     
     var movieList: [Movie] = []
     
+    // 4. 데이터 fetch
     func fetchMovieList(request: MovieRequest, completion: @escaping ([Movie]) -> Void) {
         // TODO: 데이터 fetch
         MovieService.shared.getMovieList(param: request) { [weak self]

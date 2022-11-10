@@ -7,19 +7,17 @@
 
 import Foundation
 
-// TODO: Repository Interface를 통해 영화리스트 raw data fetch - 의존성 역전
 protocol SearchMoviesUseCase {
     func fetchMovieList(requestValue: MovieRequest,
                         completion: @escaping ([Movie]) -> Void)
 }
-
 
 final class GetMovieListUseCase: SearchMoviesUseCase {
     
     private let repository: MovieRepository
     private let movieRequest: MovieRequest
     
-    
+    // 3. repository interface를 사용하여 데이터 요청(의존성 역전)
     func fetchMovieList(requestValue: MovieRequest, completion: @escaping ([Movie]) -> Void) {
         // TODO: 요청
         return repository.fetchMovieList(request: requestValue) { result in
@@ -31,8 +29,4 @@ final class GetMovieListUseCase: SearchMoviesUseCase {
         self.repository = repository
         self.movieRequest = movieRequest
     }
-}
-
-public protocol Cancellable {
-    func cancel()
 }
