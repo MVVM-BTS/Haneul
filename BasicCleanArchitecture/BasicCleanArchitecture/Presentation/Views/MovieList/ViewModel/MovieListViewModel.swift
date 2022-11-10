@@ -11,15 +11,14 @@ import RxCocoa
 import RxSwift
 
 class MovieListViewModel {
-    // TODO: Use case 요청
-    private let useCase: GetMovieListUseCase
     
-    func fetchMovieList() {
-        useCase.fetchMovieList()
-    }
+    // MARK: - Property
+    private let searchUseCase: SearchMoviesUseCase
     
-    init(useCase: GetMovieListUseCase) {
-        self.useCase = useCase
+    var requestQuery: String = ""
+    
+    init(searchUseCase: SearchMoviesUseCase) {
+        self.searchUseCase = searchUseCase
     }
     
     func setInitData() -> Observable<[Movie]> {
