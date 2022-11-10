@@ -20,7 +20,7 @@ public class MovieService {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = NetworkBase.judgeStatus(by: statusCode, data, MovieResponse.self)
+                let networkResult = NetworkBase.judgeStatus(by: statusCode, data, [Movie].self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -29,4 +29,3 @@ public class MovieService {
         
     }
 }
-

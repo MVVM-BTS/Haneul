@@ -13,13 +13,13 @@ class MovieListRepository: MovieRepository {
     
     func fetchMovieList(request: MovieRequest, completion: @escaping ([Movie]) -> Void) {
         // TODO: 데이터 fetch
-        
-        MovieService.shared.getMovieList(param: request) {
+        MovieService.shared.getMovieList(param: request) { [weak self]
             result in
             switch result {
             case .success(let data):
-                guard let data = data as? [Movie] else { return }
-                self.movieList = data
+                print("success")
+                self?.movieList = data as! [Movie]
+                completion(self!.movieList)
             case .requestErr(_):
                 print("requestErr")
             case .pathErr:
@@ -30,6 +30,5 @@ class MovieListRepository: MovieRepository {
                 print("networkFail")
             }
         }
-        completion(movieList)
     }
 }

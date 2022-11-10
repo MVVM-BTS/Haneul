@@ -19,9 +19,9 @@ struct NetworkBase {
         case 201..<300:
             return .success(decodedData.items)
         case 400..<500:
-            return .requestErr(decodedData.errorMessage)
+            return .requestErr(decodedData.message)
         case 500:
-            return .serverErr(decodedData.errorMessage)
+            return .serverErr(decodedData.message)
         default:
             return .networkFail
         }

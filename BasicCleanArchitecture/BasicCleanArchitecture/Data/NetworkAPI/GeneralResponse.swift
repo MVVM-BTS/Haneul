@@ -8,26 +8,27 @@
 import Foundation
 
 struct GeneralResponse<T: Codable>: Codable {
-    var errorMessage: String?
-    var errorCode: String?
     var lastBuildDate: String?
+    var display: Int?
     var total: Int?
     var start: Int?
-    var display: Int?
     var items: T?
+    var message: String?
+    var errorCode: String?
     
     enum CodingKeys: String, CodingKey {
-        case errorMessage, errorCode, lastBuildDate, total, start, display, items
+        case message, lastBuildDate, total, start, display, items
+        case errorCode = "error_code"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        errorMessage = (try? values.decode(String.self, forKey: .errorMessage)) ?? ""
-        errorCode = (try? values.decode(String.self, forKey: .errorCode)) ?? ""
-        lastBuildDate = (try? values.decode(String.self, forKey: .lastBuildDate)) ?? ""
-        total = (try? values.decode(Int.self, forKey: .total)) ?? 0
-        start = (try? values.decode(Int.self, forKey: .start)) ?? 0
-        display = (try? values.decode(Int.self, forKey: .display)) ?? 0
-        items = (try? values.decode(T.self, forKey: .display)) ?? nil
+        message = (try? values.decode(String.self, forKey: .message)) ?? nil
+        errorCode = (try? values.decode(String.self, forKey: .errorCode)) ?? nil
+        lastBuildDate = (try? values.decode(String.self, forKey: .lastBuildDate)) ?? nil
+        total = (try? values.decode(Int.self, forKey: .total)) ?? nil
+        start = (try? values.decode(Int.self, forKey: .start)) ?? nil
+        display = (try? values.decode(Int.self, forKey: .display)) ?? nil
+        items = (try? values.decode(T.self, forKey: .items)) ?? nil
     }
 }
