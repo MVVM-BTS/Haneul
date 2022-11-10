@@ -10,5 +10,7 @@ import Foundation
 struct URLConstant {
     
     // MARK: - Base
-    static let baseURL = "https://openapi.naver.com/v1/search/movie.json"
+    static let baseURL = "https://openapi.naver.com/v1"
+    
+    static let searchURL = "/search/movie.json"
 }

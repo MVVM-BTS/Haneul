@@ -7,17 +7,32 @@
 
 import Foundation
 
+import RxCocoa
+import RxSwift
+
 class MovieListViewModel {
-    // TODO: Use case 요청
-    private let useCase: GetMovieListUseCase
     
-    func fetchMovieList() {
-        useCase.fetchMovieList()
+    // MARK: - Property
+    private let searchUseCase: SearchMoviesUseCase
+    
+    var requestQuery: String = ""
+    
+    init(searchUseCase: SearchMoviesUseCase) {
+        self.searchUseCase = searchUseCase
     }
     
-    init(useCase: GetMovieListUseCase) {
-        self.useCase = useCase
+    func setInitData() -> Observable<[Movie]> {
+        return Observable.create { [weak self] observer in
+            let initQuery = "가"
+            let request = MovieRequest(query: initQuery)
+            
+            self?.searchUseCase.fetchMovieList(requestValue: request) { result in
+                observer.onNext(result)
+                observer.onCompleted()
+            }
+            return Disposables.create() {}
+        }
+        
     }
-    
     
 }
