@@ -13,17 +13,13 @@ enum Router {
     case getMovieSearch(param: MovieRequest)
 }
 
-extension Router: TargetType {
+extension Router: BaseTargetType {
     
     var path: String {
         switch self {
         case .getMovieSearch(_):
-            return "\(URLConstant.baseURL)/"
+            return URLConstant.searchURL
         }
-    }
-    
-    var baseURL: URL {
-        return URL(string: URLConstant.baseURL)!
     }
     
     var method: Moya.Method {
@@ -36,14 +32,8 @@ extension Router: TargetType {
     var task: Moya.Task {
         switch self {
         case .getMovieSearch(let param):
-            return .requestParameters(parameters: ["query":param.query,
-                                                   "display": param.display as Any,
-                                                   "start": param.start as Any,
-                                                   "genre": param.genre as Any,
-                                                   "country": param.country as Any,
-                                                   "yearfrom": param.country as Any,
-                                                   "yearto": param.yearto as Any],
-                                      encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["query":param.query],
+                                      encoding: URLEncoding.default)
         }
     }
     
@@ -54,4 +44,17 @@ extension Router: TargetType {
         }
     }
     
+}
+
+protocol BaseTargetType: TargetType { }
+
+extension BaseTargetType {
+
+    var baseURL: URL {
+        return URL(string: URLConstant.baseURL)!
+    }
+    
+    var sampleData: Data {
+        return Data()
+    }
 }
