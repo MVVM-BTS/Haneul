@@ -8,7 +8,17 @@
 import Foundation
 
 // TODO: 영화 객체
-struct Movie {
-    var Title: String
-    var score: Double
+struct Movie: Codable {
+    var title: String?
+    var link: String?
+    var image: String?
+    var subtitle: String?
+    var pubDate: String?
+    var director: String?
+    var actor: String?
+    var userRating: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case title, subtitle, link, image, pubDate, director, actor, userRating
+    }
 }

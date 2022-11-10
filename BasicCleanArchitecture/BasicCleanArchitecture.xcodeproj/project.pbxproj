@@ -34,7 +34,6 @@
 		08D1C4CE2911424000E36E79 /* NetworkBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1C4CD2911424000E36E79 /* NetworkBase.swift */; };
 		08D1C4D0291142CA00E36E79 /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1C4CF291142CA00E36E79 /* GeneralResponse.swift */; };
 		08E0C58928EC59410042335E /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0C58828EC59410042335E /* MovieListViewModel.swift */; };
-		08E0C58B28EC5E6B0042335E /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0C58A28EC5E6B0042335E /* MovieResponse.swift */; };
 		08E0C58D28EC62F80042335E /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0C58C28EC62F80042335E /* NetworkConstant.swift */; };
 		8C5CC4D3D1EAE1D2A70D7C5F /* Pods_BasicCleanArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAA00D605AA5941F7311F7 /* Pods_BasicCleanArchitecture.framework */; };
 /* End PBXBuildFile section */
@@ -69,7 +68,6 @@
 		08D1C4CD2911424000E36E79 /* NetworkBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBase.swift; sourceTree = "<group>"; };
 		08D1C4CF291142CA00E36E79 /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		08E0C58828EC59410042335E /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
-		08E0C58A28EC5E6B0042335E /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		08E0C58C28EC62F80042335E /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		333805CCB3FFF2F190B437B6 /* Pods-BasicCleanArchitecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicCleanArchitecture.release.xcconfig"; path = "Target Support Files/Pods-BasicCleanArchitecture/Pods-BasicCleanArchitecture.release.xcconfig"; sourceTree = "<group>"; };
 		8CBAA00D605AA5941F7311F7 /* Pods_BasicCleanArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasicCleanArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				084387D228E3216F00727ADC /* Movie.swift */,
-				08E0C58A28EC5E6B0042335E /* MovieResponse.swift */,
 				08BAAB4D28F5A61D003247B3 /* MovieRequest.swift */,
 			);
 			path = Entity;
@@ -464,7 +461,6 @@
 				08D1C4C829113FE300E36E79 /* NetworkService.swift in Sources */,
 				08BAAB4E28F5A61D003247B3 /* MovieRequest.swift in Sources */,
 				084387D928E3224B00727ADC /* Storyboard.swift in Sources */,
-				08E0C58B28EC5E6B0042335E /* MovieResponse.swift in Sources */,
 				084387E628E326DB00727ADC /* SampleNetworkAPI.swift in Sources */,
 				084387CC28E31EAA00727ADC /* MainViewController.swift in Sources */,
 				08E0C58D28EC62F80042335E /* NetworkConstant.swift in Sources */,
