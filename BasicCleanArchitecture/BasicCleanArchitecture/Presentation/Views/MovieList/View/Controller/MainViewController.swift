@@ -33,6 +33,42 @@ class MainViewController: UIViewController {
         tableView.register(UINib(nibName: Const.Identifier.TableViewCell, bundle: nil), forCellReuseIdentifier: Const.Identifier.TableViewCell)
     }
     
+    
+    private func setInitData(viewModel: MovieListViewModel) {
+        let observable = viewModel.setInitData()
+        _ = observable.subscribe { [weak self] event in
+            switch event {
+            case .next(let data):
+                self?.movieArray = data
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .error(let error):
+                print(error.localizedDescription)
+            case .completed:
+                break
+            }
+        }
+    }
+    
+    private func bind() {
+        self.searchbar.rx.text.orEmpty
+            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+            .distinctUntilChanged().subscribe(onNext: { [weak self] text in
+                if let movieArray = self?.movieArray {
+                    self?.movieArray = movieArray.filter {
+                        if let movie = $0, let title = movie.title {
+                            return title.hasPrefix(text)
+                        }
+                        else {
+                            return false
+                        }
+                    }
+                    self?.tableView.reloadData()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
