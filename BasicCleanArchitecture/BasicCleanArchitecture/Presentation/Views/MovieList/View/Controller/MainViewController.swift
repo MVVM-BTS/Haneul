@@ -52,6 +52,7 @@ class MainViewController: UIViewController {
         return viewModel
     }
     
+    // 1. 초기 데이터를 요청하고 구독하고 있다가 오면 뷰에 뿌려줌
     private func setInitData(viewModel: MovieListViewModel) {
         let observable = viewModel.setInitData()
         _ = observable.subscribe { [weak self] event in
