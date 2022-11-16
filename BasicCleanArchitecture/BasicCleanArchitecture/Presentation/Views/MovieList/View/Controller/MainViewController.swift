@@ -18,7 +18,6 @@ class MainViewController: UIViewController {
     
     // MARK: - Property
     var movieArray: [Movie?] = []
-    
     private var viewModel: MovieListViewModel!
     private let disposeBag = DisposeBag()
     
@@ -30,6 +29,7 @@ class MainViewController: UIViewController {
         setTableView()
         setSearchBar()
         setInitData(viewModel: setViewModel())
+        bind()
     }
     
     // MARK: - Function
@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: Const.Identifier.TableViewCell, bundle: nil), forCellReuseIdentifier: Const.Identifier.TableViewCell)
+        tableView.keyboardDismissMode = .onDrag
     }
     
     private func setSearchBar() {
@@ -72,21 +73,35 @@ class MainViewController: UIViewController {
     
     private func bind() {
         self.searchbar.rx.text.orEmpty
-            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+            // 1초 단위로 카운트, 마지막에 호출된 이벤트만 받기
+            .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
+            // 중복 이벤트 제거
             .distinctUntilChanged().subscribe(onNext: { [weak self] text in
-                if let movieArray = self?.movieArray {
-                    self?.movieArray = movieArray.filter {
-                        if let movie = $0, let title = movie.title {
-                            return title.hasPrefix(text)
-                        }
-                        else {
-                            return false
-                        }
-                    }
-                    self?.tableView.reloadData()
+                var searchText = text
+                if searchText == "" {
+                    searchText = "가"
                 }
+                self?.setSearchedData(viewModel: (self?.viewModel)!, searchText: searchText)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setSearchedData(viewModel: MovieListViewModel, searchText: String) {
+        let observable = viewModel.setSearchData(text: searchText)
+        
+        _ = observable.subscribe { [weak self] event in
+            switch event {
+            case .next(let data):
+                self?.movieArray = data
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .error(let error):
+                print(error.localizedDescription)
+            case .completed:
+                break
+            }
+        }
     }
 }
 
