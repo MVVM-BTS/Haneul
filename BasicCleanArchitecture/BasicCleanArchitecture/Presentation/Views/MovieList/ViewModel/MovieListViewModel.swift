@@ -34,4 +34,17 @@ class MovieListViewModel {
             return Disposables.create() {}
         }
     }
+    
+    func setSearchData(text: String) -> Observable<[Movie]> {
+        return Observable.create { [weak self] observer in
+            let initQuery = text
+            let request = MovieRequest(query: initQuery)
+            
+            self?.searchUseCase.fetchMovieList(requestValue: request) { result in
+                observer.onNext(result)
+                observer.onCompleted()
+            }
+            return Disposables.create() {}
+        }
+    }
 }
